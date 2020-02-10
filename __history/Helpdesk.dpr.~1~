@@ -1,0 +1,14 @@
+program Helpdesk;
+
+uses
+  Vcl.Forms,
+  LoginForm4 in 'src\LoginForm4.pas' {LoginForm};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TLoginForm, LoginForm);
+  Application.Run;
+end.

@@ -1,0 +1,98 @@
+unit LoginForm4;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.ComCtrls, acPNG, acImage;
+
+type
+  TLoginForm = class(TForm)
+    LoginPages: TPageControl;
+    LoginPage: TTabSheet;
+    OptLoginPage: TTabSheet;
+    User_Edit: TEdit;
+    pwd_edit: TEdit;
+    LoginBtn: TSpeedButton;
+    OptionBtn: TSpeedButton;
+    loginImage: TImage;
+    Header: TPanel;
+    BackBtn: TSpeedButton;
+    HidePwd: TsImage;
+    ShowPwd: TsImage;
+    procedure FormCreate(Sender: TObject);
+    procedure OptionBtnClick(Sender: TObject);
+    procedure LoginBtnClick(Sender: TObject);
+    procedure ShowPwdClick(Sender: TObject);
+    procedure HidePwdClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  LoginForm: TLoginForm;
+  count : Integer;
+
+implementation
+
+{$R *.dfm}
+
+uses Dashboard, dm;
+
+procedure TLoginForm.FormCreate(Sender: TObject);
+begin
+ LoginForm.LoginPages.ActivePage := LoginPage;
+end;
+
+procedure TLoginForm.LoginBtnClick(Sender: TObject);
+begin
+    if ((User_Edit.Text <> '') AND (pwd_edit.Text <> '')) then
+      begin
+         dm1.Login_q.SQL.Clear;
+         dm1.Login_q.SQL.Add('select * from utilisateur where '''+ user_edit.Text +''' = usr_name and '''+ pwd_edit.Text +''' = usr_pwd ');
+         dm1.Login_q.Open;
+
+      if not dm1.Login_q.Eof then
+        begin
+         count := 0;
+         DashForm.ShowModal;
+        end
+         else
+          begin
+           count := count + 1;
+           ShowMessage('Le mot de pass ou le nom d''utilisateur est incorrect, il reste'+ IntToStr(count) +'essaie');
+           User_Edit.Clear;
+           pwd_edit.Clear;
+            if count = 5 then
+              begin
+                Application.Terminate;
+              end;
+          end;
+    end;
+end;
+
+procedure TLoginForm.OptionBtnClick(Sender: TObject);
+begin
+ LoginPages.ActivePage := OptLoginPage;
+end;
+
+procedure TLoginForm.ShowPwdClick(Sender: TObject);
+begin
+pwd_edit.PasswordChar := #0;
+HidePwd.Visible := True;
+ShowPwd.Visible := False;
+end;
+
+procedure TLoginForm.HidePwdClick(Sender: TObject);
+begin
+pwd_edit.PasswordChar := '*';
+HidePwd.Visible := False;
+ShowPwd.Visible := True;
+end;
+
+begin
+  count := 0;
+end.

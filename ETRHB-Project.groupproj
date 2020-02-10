@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0875C744-65EB-4DCC-9AF0-7F9C4C36E7A0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Helpdesk.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ClientApp\src\ClientApp.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Helpdesk">
+        <MSBuild Projects="Helpdesk.dproj"/>
+    </Target>
+    <Target Name="Helpdesk:Clean">
+        <MSBuild Projects="Helpdesk.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Helpdesk:Make">
+        <MSBuild Projects="Helpdesk.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ClientApp">
+        <MSBuild Projects="ClientApp\src\ClientApp.dproj"/>
+    </Target>
+    <Target Name="ClientApp:Clean">
+        <MSBuild Projects="ClientApp\src\ClientApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClientApp:Make">
+        <MSBuild Projects="ClientApp\src\ClientApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Helpdesk;ClientApp"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Helpdesk:Clean;ClientApp:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Helpdesk:Make;ClientApp:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

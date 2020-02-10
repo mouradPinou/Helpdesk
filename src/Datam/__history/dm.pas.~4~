@@ -1,0 +1,30 @@
+unit dm;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, sSkinManager, Data.DB, Data.Win.ADODB;
+
+type
+  Tdm1 = class(TDataModule)
+    skn: TsSkinManager;
+    cnx: TADOConnection;
+    Login_q: TADOQuery;
+    User_table: TADOTable;
+    User_ds: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dm1: Tdm1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

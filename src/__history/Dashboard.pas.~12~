@@ -1,0 +1,158 @@
+unit Dashboard;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.ComCtrls, Vcl.ButtonGroup, acPNG,
+  sComboBoxes, Data.DB, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
+  JvDBGrid, JvgSpeedButton, VclTee.TeeGDIPlus, AdvEdit, AdvEdBtn,
+  VCLTee.TeEngine, VCLTee.TeeProcs, VCLTee.Chart, VCLTee.DBChart;
+
+type
+  TDashForm = class(TForm)
+    DashPages: TPageControl;
+    Home: TTabSheet;
+    ProfilePanel: TPanel;
+    Username: TLabel;
+    ProfileImage: TDBImage;
+    ServiceName: TLabel;
+    InfoLable: TLabel;
+    updatTimer: TTimer;
+    MenuBar: TPanel;
+    LogoImg: TImage;
+    ImgMenu: TImageList;
+    MenuGroup: TButtonGroup;
+    SettingPanel: TPanel;
+    LogPanel: TPanel;
+    Footer: TPanel;
+    interventionPage: TTabSheet;
+    ReformPage: TTabSheet;
+    AffectationPage: TTabSheet;
+    ServicePage: TTabSheet;
+    TicketPage: TTabSheet;
+    HelpPage: TTabSheet;
+    MaterialPage: TTabSheet;
+    esPage: TTabSheet;
+    gUtilisateurPage: TTabSheet;
+    IntervHistoryGrid: TPanel;
+    Grid_historyInterv: TJvDBGrid;
+    IntervOption: TPanel;
+    AddInterv: TSpeedButton;
+    EditInterv: TSpeedButton;
+    DeleteInterv: TSpeedButton;
+    TicketHistory: TPanel;
+    NewTickets: TPanel;
+    TicketOpenedPanel: TPanel;
+    TicketHistoryGrid: TJvDBGrid;
+    OpenTicket: TJvDBGrid;
+    NewTicketsGrid: TJvDBGrid;
+    TicketOptions: TPanel;
+    OptionTicket: TButtonGroup;
+    SettingPage: TTabSheet;
+    MaterialPanel: TPanel;
+    ChartsPanel: TPanel;
+    SearchPanel: TPanel;
+    MaterialGrid: TJvDBGrid;
+    MaterialOption: TButtonGroup;
+    MaterialChartOption: TPanel;
+    Chart1: TSpeedButton;
+    Chart2: TSpeedButton;
+    Chart3: TSpeedButton;
+    MaterialChart: TDBChart;
+    MaterialSearchEd: TAdvEditBtn;
+    AdvencedSeachMaterial: TGroupBox;
+    SearchBtnMaterial: TSpeedButton;
+    procedure MenuGroupItems0Click(Sender: TObject);
+    procedure MenuGroupItems1Click(Sender: TObject);
+    procedure updatTimerTimer(Sender: TObject);
+    procedure MenuGroupItems2Click(Sender: TObject);
+    procedure MenuGroupItems3Click(Sender: TObject);
+    procedure MenuGroupItems4Click(Sender: TObject);
+    procedure MenuGroupItems5Click(Sender: TObject);
+    procedure MenuGroupItems6Click(Sender: TObject);
+    procedure MenuGroupItems7Click(Sender: TObject);
+    procedure MenuGroupItems8Click(Sender: TObject);
+    procedure MenuGroupItems9Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DashForm: TDashForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDashForm.FormCreate(Sender: TObject);
+begin
+ DashPages.ActivePage := Home;
+end;
+
+procedure TDashForm.MenuGroupItems0Click(Sender: TObject);
+begin
+ DashPages.ActivePage := Home;
+end;
+
+procedure TDashForm.MenuGroupItems1Click(Sender: TObject);
+begin
+ DashPages.ActivePage := interventionPage;
+end;
+
+procedure TDashForm.MenuGroupItems2Click(Sender: TObject);
+begin
+ DashPages.ActivePage := ReformPage;
+end;
+
+procedure TDashForm.MenuGroupItems3Click(Sender: TObject);
+begin
+ DashPages.ActivePage := AffectationPage;
+end;
+
+procedure TDashForm.MenuGroupItems4Click(Sender: TObject);
+Begin
+ DashPages.ActivePage := ServicePage;
+end;
+
+procedure TDashForm.MenuGroupItems5Click(Sender: TObject);
+begin
+ DashPages.ActivePage := TicketPage;
+end;
+
+procedure TDashForm.MenuGroupItems6Click(Sender: TObject);
+begin
+ DashPages.ActivePage := HelpPage;
+end;
+
+procedure TDashForm.MenuGroupItems7Click(Sender: TObject);
+begin
+ DashPages.ActivePage := MaterialPage;
+end;
+
+procedure TDashForm.MenuGroupItems8Click(Sender: TObject);
+begin
+ DashPages.ActivePage := esPage;
+end;
+
+procedure TDashForm.MenuGroupItems9Click(Sender: TObject);
+begin
+ DashPages.ActivePage := gUtilisateurPage;
+end;
+
+procedure TDashForm.updatTimerTimer(Sender: TObject);
+begin
+ MenuGroup.ButtonHeight := MenuGroup.Height div MenuGroup.Items.Count;
+ Footer.Caption := TimeToStr(Time);
+ OptionTicket.ButtonHeight := OptionTicket.Height div OptionTicket.Items.Count;
+ MaterialOption.ButtonHeight := MaterialOption.Height div MaterialOption.Items.Count;
+ Chart1.Width := MaterialChartOption.Width div 3;
+ Chart2.Width := MaterialChartOption.Width div 3;
+ Chart3.Width := MaterialChartOption.Width div 3;
+end;
+
+end.
